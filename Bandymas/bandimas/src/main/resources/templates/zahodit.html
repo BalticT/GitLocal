@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello Spring Security</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+</head>
+<body>
+
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+
+
+<form th:action="@{/zahod}" method="post" enctype="multipart/form-data"  th:object="${imageModel}" >
+
+
+    <input type="text"   name="pavadinimas"  th:field="*{name}"  /> <br />
+
+    <input type="text"  name="tipas"  th:field="*{type}" /> <br />
+
+    <!--<input type="text" id="name" name="pavadinimas"  /> <br />-->
+    <!--<input type="text" id="type" name="tipas" /> <br />-->
+
+
+    <input type="file" name="uploadpic"    /> <br />
+
+    <input type="submit" value="Upload" />
+</form>
+
+</body>
+</html>

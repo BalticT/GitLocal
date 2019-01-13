@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello Spring Security</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+</head>
+<body>
+
+<div th:if="${message}">
+    <h2 th:text="${message}"/>
+</div>
+
+
+<form th:action="@{/upload}" method="post" enctype="multipart/form-data"  th:object="${imageModel}" >
+
+
+    <label for="pavad">Paveikslo pavadinimas</label>
+    <input id="pavad" type="text"  placeholder="pavadinimas"  name="pavadinimas"  /> <br />
+
+    <label for="tip">Paveikslo tipas</label>
+    <input id="tip" type="text" placeholder="tipas" name="tipas" /> <br />
+
+    <!--<input type="text" id="name" name="pavadinimas"  /> <br />-->
+    <!--<input type="text" id="type" name="tipas" /> <br />-->
+
+    <!--<ul>-->
+        <!--<li th:each="checkboxValue: ${multiCheckboxAllValues}">-->
+            <!--<input type="checkbox"-->
+                   <!--th:field="*{multiCheckboxSelectedValues}"-->
+                   <!--th:value="${checkboxValue}" />-->
+            <!--<label-->
+                    <!--th:for="${#ids.prev('multiCheckboxSelectedValues')}"-->
+                    <!--th:text="${checkboxValue}" name="checkboxValue"  ></label>-->
+        <!--</li>-->
+    <!--</ul>-->
+
+    <!--<label for="naujas">Naujas tagas</label>-->
+    <!--<input id="naujas" type="text"  name="naujastagas" class="form-control" /> <br />-->
+
+
+    <div class="row">
+        <div class="col">
+
+                <!--LIST OF MOVIES-->
+            <div id="movieList">
+
+
+
+                <div class="row item" th:each="movie, status : ${catalog.movies}">
+                    <div class="row">
+                        <div class="col form-group" >Naujas</div>
+                    </div>
+                    <div class="col form-group">
+
+                        <label for="naujas">Naujas tagas</label>
+                        <input id="naujas" th:field="*{movies[__${status.index}__].title}" type="text"  name="naujastagas" class="form-control"> Pavadinimas </input>
+                        <label for="naujas">Naujas tagas</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-success" onclick="addRow()">Prideti Taga</button>
+                    </div>
+                </div>
+
+
+
+
+    <br>
+    pasirinkti taga:
+
+    <ul>
+        <li th:each="checkboxValue: ${tageriai}">
+            <input type="checkbox"
+                   th:field="*{multiCheckboxSelectedValues}"
+                   th:value="${checkboxValue.name}" />
+            <label
+                    th:for="${#ids.prev('multiCheckboxSelectedValues')}"
+                    th:text="${checkboxValue.name}" name="checkboxValue"  ></label>
+        </li>
+    </ul>
+
+    <!--<select class="form-control" th:field="*{multiCheckboxSelectedValues}"  multiple="multiple">-->
+
+        <!--<option th:each="part : ${tageriai}"-->
+                 <!--th:field="*{multiCheckboxSelectedValues}"-->
+        <!--th:value="${part.id}"-->
+        <!--th:text="${part.name}"-->
+                   <!--&gt;Part name</option>-->
+    <!--</select>-->
+
+    <!--th:value="${part.id}"-->
+    <!--th:text="${part.name}"-->
+    <input type="file" name="fileUpload"  /> <br />
+
+
+    <select class="form-control" th:field="*{multiCheckboxSelectedValues}"  multiple="multiple">
+
+    <option th:each="part : ${tageriai}"
+    th:field="*{multiCheckboxSelectedValues}"
+    th:for="${part.tag_id}"
+
+            th:value="${part.name}"
+    th:text="${part.name}"
+    >Part name</option>
+    </select>
+
+    <input type="submit" value="Create" />
+</form>
+
+
+<p><a href="/profile" th:href="@{/profile}">Back to profile page</a></p>
+
+
+
+<script>
+let addRow = function () {
+        let listName = 'movies'; //list name in Catalog.class
+        let fieldsNames = [ 'title']; //field names from Movie.class
+        let rowIndex = document.querySelectorAll('.item').length; //we can add mock class to each movie-row
+
+        let row = document.createElement('div');
+        row.classList.add('row', 'item');
+
+        fieldsNames.forEach((fieldName) => {
+            let col = document.createElement('div');
+            col.classList.add('col', 'form-group');
+            if (fieldName === 'id') {
+                col.classList.add('d-none'); //field with id - hidden
+            }
+
+            let input = document.createElement('input');
+            input.type = 'text';
+            input.classList.add('form-control');
+            input.id = listName + rowIndex + '.' + fieldName;
+            input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
+
+            col.appendChild(input);
+            row.appendChild(col);
+        });
+
+        document.getElementById('movieList').appendChild(row);
+};
+</script>
+
+</body>
+</html>

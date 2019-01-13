@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Spring Boot</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>Spring Boot Web Thymeleaf Example</h1>
+        <h2>
+            <span th:text="'Message: ' + ${message}"></span>
+        </h2>
+    </div>
+
+</div>
+<!-- /.container -->
+
+
+<!--<div class="logout" th:if="${authenticated}">-->
+    <!--<div>-->
+        <!--<form action="#" th:action="@{/logout}" method="post">-->
+            <!--<input type="submit" value="Logout" />-->
+        <!--</form>-->
+    <!--</div>-->
+<!--</div>-->
+<h1>Profile</h1>
+<!--<p>Sveikas, <span th:text="${name}"></span></p>-->
+
+<form  th:action="@{/profile}" method="post">
+    <label> Paieska pagal pavadinima</label>
+    <input type="text" name="name"/> <br>
+    <label> Paieska pagal tipa</label>
+    <input type="text" name="type"/><br>
+    <label> Paieska pagal taga</label>
+    <input type="text" name="tagas"/><br>
+     <input type="submit" value="Find"/>
+</form>
+
+<form action="#" th:action="@{/profile}" th:href="@{/profile}" method="post">
+    <input type="submit" value="Show All" />
+</form>
+
+
+<!--<p><a href="/profile" th:href="@{/profile}">Back to profile page</a></p>-->
+
+
+<table>
+    <tr th:each="user: ${useriai}">
+
+        <!--<th th:text="${user.getUsername()}" ></th>-->
+
+        <th th:text="${user.name}" ></th>
+        <th th:text="${user.type}" ></th>
+
+       <th> <img th:if="*{user.pic != null}" th:src="@{'data:image/png;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(user.pic)}}"  width="50" height="50" />
+       </th>
+
+        <th>
+            <a th:href="@{'/profile/' + ${user.getId()} + '/delete'}">Delete</a>
+        </th>
+        <th>
+            <a th:href="@{'/profile/' + ${user.getId()} }">Edit</a>
+        </th>
+        <!--<th th:file="${user.pic}"></th>-->
+
+    <!--&lt;!&ndash;<img src="${user.pic}"/>&ndash;&gt;-->
+
+    </tr>
+
+
+    <!--&#45;&#45;&#45;&#45;  vienas -->
+
+    <!--<th th:text="${vienas.name}" ></th>-->
+    <!--<th th:text="${vienas.type}" ></th>-->
+
+    <!--<th>-->
+        <!--<a th:href="@{'/profile/' + ${vienas.getId()} + '/delete'}">Delete</a>-->
+    <!--</th>-->
+    <!--<th>-->
+        <!--<a th:href="@{'/profile/' + ${vienas.getId()}}">Edit</a>-->
+    <!--</th>-->
+
+    <!--<th th:file="${vienas.pic}" ></th>-->
+    <span>- ok ob ok - </span>
+    <!--<th th:file="${vienas.getPic()}" ></th>-->
+    <!--<img th:if="*{vienas.pic != null}" th:src="@{'data:image/png;base64,' + *{T(org.springframework.util.Base64Utils).encodeToString(vienas.pic)}}"/>-->
+
+
+
+
+    <!--<img th:src="@{'data:image/jpeg;base64,'+${vienas.pic.encodedString}}" />-->
+    <!--<img src="${vienas.pic}"/>-->
+    <!--<img src="${vienas.getPic()}"/>-->
+
+</table>
+
+
+
+<p><a href="/index" th:href="@{/upload}">Back to upload page</a></p>
+
+
+
+
+
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

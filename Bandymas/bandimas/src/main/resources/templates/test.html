@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello Spring Security</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+</head>
+<body>
+
+
+<form action="#" th:action="@{/youform}" th:object="${imageModel}" method="post">
+
+
+    <ul>
+        <li th:each="checkboxValue: ${multiCheckboxAllValues}">
+            <input type="checkbox"
+                   th:field="*{multiCheckboxSelectedValues}"
+                   th:value="${checkboxValue}" />
+            <label
+                    th:for="${#ids.prev('multiCheckboxSelectedValues')}"
+                    th:text="${checkboxValue}" name="checkboxValue"  ></label>
+        </li>
+    </ul>
+
+
+    <input type="submit" value="Update" />
+</form>
+
+
+
+</body>
+</html>

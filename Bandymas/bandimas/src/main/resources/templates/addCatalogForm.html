@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hello Spring Security</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" href="/js/good.js" th:href="@{/js/good.js}" />
+
+</head>
+<body>
+
+
+<form th:object="${catalog}" method="post" th:action="${'/savecatalog'}">
+
+    <!--INPUT FIELDS-->
+    <div class="row">
+        <div class="col">
+
+            <!--CATALOG FIELDS-->
+            <div>
+                <div class="row">
+                    <div class="col form-group">
+                        <label for="catalogName">catalogName</label>
+                        <input th:field="*{name}" type="text" class="form-control" id="catalogName">
+                    </div>
+                </div>
+            </div>
+
+            <!--LIST OF MOVIES-->
+            <div id="movieList">
+                <div class="row">
+                    <div class="col form-group d-none">id</div>
+                    <div class="col form-group">title</div>
+                    <div class="col form-group">info</div>
+                </div>
+                <div class="row item" th:each="movie, status : ${catalog.movies}">
+                    <div class="col form-group d-none">
+                        <input th:field="*{movies[__${status.index}__].id}" type="text" class="form-control">
+                    </div>
+                    <div class="col form-group">
+                        <input th:field="*{movies[__${status.index}__].title}" type="text" class="form-control">
+                    </div>
+                    <div class="col form-group">
+                        <input th:field="*{movies[__${status.index}__].info}" type="text" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--ADD NEW ROW BUTTON-->
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-success" onclick="addRow()">Add row</button>
+        </div>
+    </div>
+
+    <!--SUBMIT FORM BUTTON-->
+    <div class="row text-right">
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+</form>
+
+
+
+<p><a href="/books/create" th:href="@{/books/create}">Back to create page</a></p>
+
+<script src="/js/good.js"></script>
+
+</body>
+</html>
