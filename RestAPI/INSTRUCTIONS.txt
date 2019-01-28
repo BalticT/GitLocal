@@ -1,0 +1,3 @@
+Run the project on Netbeans or other IDE.
+With program POSTMAN use commands like GET, POST, PUT, DELETE and links(uri) according to paths of RestKlase java class.
+Enjoy.

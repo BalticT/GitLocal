@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+ <head>
+  <title>Form to create a new resource</title>
+ </head>
+<body>
+    <form action="/RestWeb/rest/create" method="POST">
+    <label for="Title">Title: </label>
+    <input name="title" />
+    <br/>
+    <label for="Price">Price: </label>
+    <input  name="price" />
+    <br/>
+    <label for="Stock">Stock: </label>
+    <input type="number"  name="stock" />
+    <br/>
+    <label for="location">Location</label>
+    <br/>
+    Country: 
+    <input name="country" />
+    City:
+    <input name="city" />
+    Street:
+    <input name="street" />
+    GPS:
+    <input name="gps" />
+    <br/>
+    
+    
+    Description:
+    <TEXTAREA NAME="description" COLS=40 ROWS=6></TEXTAREA>
+    <br/>
+    <input type="submit" value="Submit" />
+    </form>
+</body>
+</html>
